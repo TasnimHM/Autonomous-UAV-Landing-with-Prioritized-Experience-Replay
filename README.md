@@ -189,12 +189,13 @@ python3 rraaa.py configs/single-static.yml
 ## 👩‍💻 Author
 
 **Humaira Tasnim**
-Grad Student, Mechanical and Nuclear Engineering
-Tennessee Tech University
+-Grad Student, 
+-Mechanical and Nuclear Engineering
+-Tennessee Tech University
 
 
 ## Contact
-  - [Humaira Tasnim](mailto:humairatasnim601@gmail.com)  - 
+  - [Humaira Tasnim](mailto:humairatasnim601@gmail.com)  
   - [Hyung-Jin Yoon](mailto:stargaze221@gmail.com)
   - [Ayoosh Bansal](mailto:ayooshb2@illinois.edu)
   - [Mikael Yeghiazaryan](mailto:myeghiaz@illinois.edu)
