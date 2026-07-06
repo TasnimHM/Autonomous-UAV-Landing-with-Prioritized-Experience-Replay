@@ -1,0 +1,148 @@
+services:
+  roscore:
+    container_name: roscore
+    build:
+      context: .
+      dockerfile: Dockerfile.roscore
+    privileged: true
+    network_mode: host
+    command: /bin/bash -c 'source /opt/ros/noetic/setup.bash && roscore'
+
+  carla:
+        image: stargaze0909/carla_uli_ubuntu20:latest
+        logging:
+          options:
+            max-size: "10m"
+            max-file: "3"
+        privileged: true
+        environment:
+            SDL_VIDEODRIVER: x11
+            DISPLAY: $DISPLAY
+        ports:
+            - "2000:2000"
+            - "2001:2001"
+            - "2002:2002"
+        command: ./CarlaUE4.sh #-quality-level=Low -carla-rpc-port=2000
+        volumes:
+            - /tmp/.X11-unix:/tmp/.X11-unix:rw
+            - /etc/localtime:/etc/localtime
+            - /etc/timezone:/etc/timezone
+            - /usr/share/vulkan/icd.d:/usr/share/vulkan/icd.d
+        deploy:
+          resources:
+            reservations:
+              devices:
+                - driver: nvidia
+                  count: "all"
+                  capabilities: [compute,utility,graphics,display]
+
+  env_sim:
+    container_name: env_sim
+    build:
+      context: ../env_sim
+      dockerfile: Dockerfile
+    environment:
+      - DISPLAY=${DISPLAY}
+      - SERVICE_NAME=env_sim
+    volumes:
+        - /tmp/.X11-unix:/tmp/.X11-unix:rw
+        - ../env_sim:/catkin_ws/src/env_sim
+        - ../utils:/catkin_ws/src/env_sim/rraaa/script/utils
+    privileged: true
+    network_mode: host
+    devices:
+      - "/dev/snd"
+    tty: true
+    stdin_open: true
+    depends_on:
+      - roscore
+    working_dir: /catkin_ws/src/env_sim
+
+  sim_control:
+    container_name: sim_control
+    build:
+      context: ../sim_control
+      dockerfile: Dockerfile
+    volumes:
+        - ../sim_control:/catkin_ws/src/sim_control
+        - ../utils:/catkin_ws/src/sim_control/script/utils
+    privileged: true
+    network_mode: host
+    tty: true
+    stdin_open: true
+    depends_on:
+      - roscore
+    working_dir: /catkin_ws/src/sim_control
+    environment:
+      - SERVICE_NAME=sim_control
+
+  jaxguam:
+    container_name: jaxguam
+    build:
+      context: ../vehicles/jaxguam
+      dockerfile: Dockerfile
+    volumes:
+        - ../vehicles/jaxguam:/catkin_ws/src/jaxguam
+        - ../utils:/catkin_ws/src/jaxguam/script/utils
+        - /tmp/.X11-unix:/tmp/.X11-unix:rw
+        - ../vehicles/jaxguam/runs:/catkin_ws/runs
+    privileged: true
+    network_mode: host
+    devices:
+      - "/dev/snd"
+    tty: true
+    stdin_open: true
+    depends_on:
+      - roscore
+    working_dir: /catkin_ws/src/jaxguam
+    environment:
+      - DISPLAY=${DISPLAY}
+      - QT_X11_NO_MITSHM=1
+      - SERVICE_NAME=jaxguam
+    entrypoint: bash  
+
+
+  yolov5:
+    container_name: yolov5
+    build:
+      context: ../perception/yolov5
+      dockerfile: Dockerfile
+    volumes:
+        - ../perception/yolov5:/catkin_ws/src/yolov5
+        - ../utils:/catkin_ws/src/yolov5/script/utils
+        # - ../perception/yolov5/yolo_ashi.pt:/catkin_ws/src/yolov5/yolo_ashik.pt
+    privileged: true
+    network_mode: host
+    devices:
+      - "/dev/snd"
+    tty: true
+    stdin_open: true
+    depends_on:
+      - roscore
+    working_dir: /catkin_ws/src/yolov5
+    #command: rosrun yolov5 node_yolo.py
+    command: bash /catkin_ws/src/yolov5/script/start_nodes.sh
+
+    environment:
+      - SERVICE_NAME=yolov5
+    #entrypoint: bash 
+
+  ground_station:
+    container_name: ground_station
+    build:
+      context: ../ground_station
+      dockerfile: Dockerfile
+    volumes:
+        - ../ground_station:/catkin_ws/src/ground_station
+        - ../utils:/catkin_ws/src/ground_station/script/utils
+    privileged: true
+    network_mode: host
+    devices:
+      - "/dev/snd"
+    tty: true
+    stdin_open: true
+    depends_on:
+      - roscore
+    working_dir: /catkin_ws/src/ground_station
+    environment:
+      - SERVICE_NAME=ground_station

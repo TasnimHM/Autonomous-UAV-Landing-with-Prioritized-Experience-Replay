@@ -1,0 +1,8 @@
+start_delay: 1
+ros:
+  workspace: /catkin_ws
+  ros_package: yolov5
+  rosrun_files:
+  #- node_yolo.py
+  - node_yolo_dual.py
+  #- ppo_error.py

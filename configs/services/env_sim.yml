@@ -1,0 +1,71 @@
+start_delay: 1
+ros:
+  workspace: /catkin_ws
+  ros_package: rraaa
+  launch_file: run.launch
+weather:
+      weather_flag: default       # Options: 'default' or 'custom'
+      lighting_flag: default    # Options: 'default' or 'custom'
+      type: WetSunset     # Required if weather_flag is 'custom'
+      lighting:                   # Required if lighting_flag is 'custom'
+        cloudiness: 90.0          #
+        precipitation: 70.0        # 
+        precipitation_deposits: 50.0  # 
+        sun_altitude_angle: -90.0    # Sun is below the horizon (nighttime)
+        sun_azimuth_angle: 0.0       # Azimuth angle doesn't matter at night
+        fog_density: 20.0            # 
+        fog_distance: 100.0         # 
+        wetness: 20.0                # 
+        wind_intensity: 30.0         # 
+
+
+# host_setup: # Commands to run on host machine 
+#   - xhost +local:docker
+
+#carla weather condition options
+#ClearNoon
+# ClearSunset
+# CloudyNoon
+# CloudySunset
+# WetNoon
+# WetSunset
+# MidRainyNoon
+# MidRainSunset
+# HardRainNoon
+# HardRainSunset
+# SoftRainNoon
+# SoftRainSunse
+
+# for clear night
+
+      # cloudiness: 10.0          # Minimal clouds for a clear sky
+      # precipitation: 0.0        # No rain
+      # precipitation_deposits: 0.0  # No wetness or puddles
+      # sun_altitude_angle: -90.0    # Sun is below the horizon (nighttime)
+      # sun_azimuth_angle: 0.0       # Azimuth angle doesn't matter at night
+      # fog_density: 5.0            # Slight fog for atmospheric effect
+      # fog_distance: 300.0         # Long visibility for a clear night
+      # wetness: 0.0                # No wet ground
+      # wind_intensity: 0.0         # Calm wind
+
+
+
+#For HardRain 
+        # cloudiness: 80.0
+        # precipitation: 50.0
+        # precipitation_deposits: 30.0
+        # sun_altitude_angle: 15.0
+        # sun_azimuth_angle: 90.0
+        # fog_density: 20.0
+        # fog_distance: 150.0
+
+#For Rainy Night
+        # cloudiness: 90.0          #
+        # precipitation: 70.0        # 
+        # precipitation_deposits: 50.0  # 
+        # sun_altitude_angle: -90.0    # Sun is below the horizon (nighttime)
+        # sun_azimuth_angle: 0.0       # Azimuth angle doesn't matter at night
+        # fog_density: 20.0            # 
+        # fog_distance: 100.0         # 
+        # wetness: 20.0                # 
+        # wind_intensity: 30.0         # 

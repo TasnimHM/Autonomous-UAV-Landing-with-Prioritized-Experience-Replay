@@ -1,0 +1,17 @@
+start_delay: 1
+ros:
+  workspace: /catkin_ws
+  ros_package: jaxguam
+  rosrun_files:
+  - landing_controller.py
+  - node_planner.py
+  - node_vehicle.py #existed added
+  - episode_manager.py #newly added
+  #- land_vtol.py
+  #- node_landing_path.py #newly added
+  #  - run_simulator.py
+  
+ 
+
+
+    
