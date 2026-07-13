@@ -162,15 +162,12 @@ python3 -m pip install loguru
 Clone this repository with submodules.
 
 ```bash
-git clone https://github.com/CPS-IL/rraaa-sim.git --recurse-submodules
+git clone https://github.com/TasnimHM/Autonomous-UAV-Landing-with-Prioritized-Experience-Replay.git
 cd rraaa-sim
-git switch htasnim
-git submodule update --init --recursive
 #docker sudo access:
 sudo chmod 666 /var/run/docker.sock
 #docker access to host display
 xhost +local:docker
-
 
 python3 rraaa.py configs/single-static.yml
 ```
