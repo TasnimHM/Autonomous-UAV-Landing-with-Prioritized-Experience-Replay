@@ -139,12 +139,10 @@ When the simulation launches, four nodes start in sequence. First, node_carla.py
 
 ---
 
-## 🔮 Next Steps
+## Next Steps
 
-- [ ] Transition logging `(state, action, reward, next_state)` per step
 - [ ] PER buffer implementation with priority sampling
 - [ ] RL policy training to replace geometric gating
-- [ ] Uncertainty estimation (MC Dropout) for YOLO experts
 - [ ] Evaluation: learned gating vs geometric baseline
 
 ---
