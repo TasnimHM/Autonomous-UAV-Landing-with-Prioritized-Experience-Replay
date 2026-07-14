@@ -3,7 +3,7 @@
 
 This repository documents my MS research project on vision-based autonomous UAV landing at the **LCASL Lab, Tennessee Tech University**. The work spans two phases: a published perception framework and an ongoing reinforcement learning extension.
 
-> **Note:** This work is built on top of a private simulation stack collaboratively developed between the **LCASL Lab at TTU** and **UIUC**. The full stack remains private. This repository contains only my personal research contributions on top of that infrastructure.
+> **Note:** This work is built on top of a private simulation stack collaboratively developed between the **LCASL Lab at TTU** and **UIUC**.
 
 ---
 
