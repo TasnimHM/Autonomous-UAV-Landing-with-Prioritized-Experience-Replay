@@ -170,6 +170,19 @@ sudo chmod 666 /var/run/docker.sock
 xhost +local:docker
 
 python3 rraaa.py configs/single-static.yml
+
+# Get inside the jaxguam container
+docker exec -it jaxguam bash
+
+# Then source ROS
+source /opt/ros/noetic/setup.bash
+source /catkin_ws/devel/setup.bash
+
+# Then go to script folder
+cd /catkin_ws/src/jaxguam/script
+
+# Run per_logger
+python3 per_logger.py
 ```
 
 ## 📚 References
