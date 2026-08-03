@@ -171,7 +171,7 @@ xhost +local:docker
 
 python3 rraaa.py configs/single-static.yml
 
-# Get inside the jaxguam container
+# To get inside the jaxguam container
 docker exec -it jaxguam bash
 
 # Then source ROS
@@ -181,7 +181,7 @@ source /catkin_ws/devel/setup.bash
 # Then go to script folder
 cd /catkin_ws/src/jaxguam/script
 
-# Run per_logger
+# Run per_logger to log the datas
 python3 per_logger.py
 ```
 
